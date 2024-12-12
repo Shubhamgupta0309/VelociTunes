@@ -7,12 +7,6 @@ class SignupScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white), // Back arrow
-          onPressed: () {
-            Navigator.pop(context); // Go back to the previous screen
-          },
-        ),
       ),
       body: Container(
         decoration: BoxDecoration(
