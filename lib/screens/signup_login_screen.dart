@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'signup_screen.dart';  // Import the SignupScreen file if it's in a separate file
+import 'signup_screen.dart';
+import 'login_screen.dart'; // Import the LoginScreen
 
 class SignupLoginScreen extends StatelessWidget {
   @override
@@ -74,7 +75,13 @@ class SignupLoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Navigate to LoginScreen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   minimumSize: Size(double.infinity, 50),

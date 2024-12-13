@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "956587136904",
+    "project_id": "velocitunes-0",
+    "storage_bucket": "velocitunes-0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956587136904:android:121e51f53ea9da4d994c3d",
+        "android_client_info": {
+          "package_name": "com.example.velocitunes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR1eg1a6LRv58OJOYheOdrlsCSCs19lAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

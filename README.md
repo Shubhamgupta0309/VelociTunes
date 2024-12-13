@@ -1,4 +1,4 @@
-# flutterproject
+# velocitunes
 
 A new Flutter project.
 
