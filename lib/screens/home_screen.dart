@@ -6,6 +6,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final User? user = FirebaseAuth.instance.currentUser;
 
+    if (user == null) {
+      // Redirect to the signup screen if the user is not logged in
+      return Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Screen'),
@@ -21,7 +28,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          'Welcome, ${user?.email ?? 'User'}!',
+          'Welcome, ${user.email ?? 'User'}!',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),

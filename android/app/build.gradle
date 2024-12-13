@@ -44,8 +44,15 @@ flutter {
     source = "../.."
 }
 
-dependencies{
-    implementation "com.google.firebase:firebase-analytics"
+dependencies {
+    // Firebase BOM for consistent versioning
     implementation platform("com.google.firebase:firebase-bom:33.7.0")
+
+    // Firebase core and analytics
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // Firebase Authentication
     implementation 'com.google.firebase:firebase-auth-ktx'
+
+
 }

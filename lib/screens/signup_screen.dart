@@ -6,12 +6,10 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
 
   Future<void> _signup(BuildContext context) async {
-    // Validate inputs before attempting signup
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
-      // Show error if either email or password is empty
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please enter both email and password.')),
       );
@@ -19,7 +17,6 @@ class SignupScreen extends StatelessWidget {
     }
 
     if (password.length < 8) {
-      // Show error if password is less than 8 characters
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Password must be at least 8 characters long.')),
       );
@@ -27,21 +24,57 @@ class SignupScreen extends StatelessWidget {
     }
 
     try {
-      // Proceed with Firebase signup
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      // Explicitly use UserCredential type
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      // Show success message and navigate to HomeScreen
+      // Explicit null check
+      User? user = userCredential.user;
+      if (user != null) {
+        print("User created: ${user.email}");
+        print("User UID: ${user.uid}");
+
+        // Optional: Store additional user info in Firestore
+        // await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        //   'email': user.email,
+        //   'createdAt': FieldValue.serverTimestamp(),
+        // });
+
+        // Navigate to HomeScreen
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        throw Exception('User creation failed');
+      }
+    } on FirebaseAuthException catch (e) {
+      // More specific Firebase Auth error handling
+      String errorMessage = 'An error occurred';
+
+      switch (e.code) {
+        case 'weak-password':
+          errorMessage = 'The password is too weak.';
+          break;
+        case 'email-already-in-use':
+          errorMessage = 'The email is already in use.';
+          break;
+        case 'invalid-email':
+          errorMessage = 'The email address is invalid.';
+          break;
+        default:
+          errorMessage = e.message ?? 'An authentication error occurred';
+      }
+
+      print("Firebase Auth Error: ${e.code}");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Signup Successful!')),
+        SnackBar(content: Text(errorMessage)),
       );
-      Navigator.pushReplacementNamed(context, '/home');
     } catch (e) {
-      // Catch and display any errors during signup
+      // Catch-all for any other unexpected errors
+      print("Unexpected error during signup: $e");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.toString()}')),
+        SnackBar(content: Text('An unexpected error occurred: $e')),
       );
     }
   }
