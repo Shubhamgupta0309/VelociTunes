@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'home_screen.dart';
 import 'signup_login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -10,12 +12,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 2), () {
+    _checkLoginStatus();
+  }
+
+  void _checkLoginStatus() async {
+    await Future.delayed(Duration(seconds: 2)); // Simulate loading time
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } else {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => SignupLoginScreen()),
       );
-    });
+    }
   }
 
   @override
@@ -30,14 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         ),
         child: Center(
-          child: Container(
-            width: 100.0,
-            height: 100.0,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-            ),
-          ),
+          child: CircularProgressIndicator(color: Colors.white),
         ),
       ),
     );

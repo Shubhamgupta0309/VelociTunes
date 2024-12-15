@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'signup_screen.dart';
-import 'login_screen.dart'; // Import the LoginScreen
+import 'login_screen.dart';
 
 class SignupLoginScreen extends StatelessWidget {
   @override
@@ -50,33 +50,7 @@ class SignupLoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  side: BorderSide(color: Colors.white),
-                  minimumSize: Size(double.infinity, 50),
-                ),
-                child: Text('Google', style: TextStyle(color: Colors.white)),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  side: BorderSide(color: Colors.white),
-                  minimumSize: Size(double.infinity, 50),
-                ),
-                child: Text('Facebook', style: TextStyle(color: Colors.white)),
-              ),
-              SizedBox(height: 20),
-              Text(
-                'OR',
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
                 onPressed: () {
-                  // Navigate to LoginScreen
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LoginScreen()),
