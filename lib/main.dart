@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:velocitunes/pages/home_screen.dart';
-import 'package:velocitunes/pages/signup_login_screen.dart';
+import 'package:velocitunes/pages/home.dart';
+import 'package:velocitunes/pages/signup_or_signin.dart';
 import 'package:velocitunes/pages/splash.dart';
 
 void main() async {
